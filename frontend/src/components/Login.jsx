@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { FaGoogle } from "react-icons/fa";
+import { useForm } from "react-hook-form";
 
 const Login = () => {
+    const [message, setMessage] = useState("")
+    const { register, handleSubmit, watch, formState: { errors } } = useForm();
     return (
         <div className='h-[calc(100vh-120px)] flex justify-center items-center'>
             <div className='w-full max-w-sm mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'>
@@ -30,6 +34,9 @@ const Login = () => {
                             placeholder="Password"
                         />
                     </div>
+                    {
+                        message && <p className='text-red-500 text-xs italic mb-3'>{message}</p>
+                    }
                     <div className="flex flex-wrap space-y-2.5 items-center justify-between">
                         <button
                             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -44,6 +51,14 @@ const Login = () => {
                     Haven't an account? Please
                     <Link to="/register" className='text-blue-500 hover:text-blue-800'> Register</Link>
                 </p>
+                {/* Google Sign In method */}
+                <div className='mt-4'>
+                    <button className='w-full flex flex-wrap gap-1 items-center justify-center bg-secondary hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none'>
+                        <FaGoogle className='mr-2' />
+                        Sign in with Google
+                    </button>
+                </div>
+                <p className='mt-5 text-center text-gray-500 text-xs'>@2024 Book Store.All rights reserved</p>
             </div>
         </div>
     );
