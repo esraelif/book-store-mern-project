@@ -6,6 +6,7 @@ import { LuUser2 } from "react-icons/lu";
 import { FiHeart } from "react-icons/fi";
 import { CgShoppingCart } from "react-icons/cg";
 import avatarImg from '../assets/news/avatar.png';
+import { useSelector } from 'react-redux';
 
 const navigation = [
     { name: "Dashboard", href: "/dashboard" },
@@ -14,7 +15,9 @@ const navigation = [
     { name: "Check Out", href: "/checkout" },
 ]
 const Navbar = () => {
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const cartItems = useSelector(state => state.cart.cartItems)
+
     const currentUser = false;
 
     return (
@@ -69,13 +72,16 @@ const Navbar = () => {
                     </button>
                     <Link to='/cart' className=' bg-primary p-1 sm:px-6 px-2 flex items-center rounded-sm'>
                         <CgShoppingCart className='size-6' />
-                        <span className='text-sm font-semibold sm:ml-1'>0</span>
+                        {
+                            cartItems.length > 0 ? <span className='text-sm font-semibold sm:ml-1'>{cartItems.length}</span> : <span className='text-sm font-semibold sm:ml-1'>0</span>
+                        }
+
                     </Link>
 
 
                 </div>
-            </nav >
-        </header >
+            </nav>
+        </header>
     );
 }
 
